@@ -12,3 +12,14 @@ class Conversation(models.Model):
     
 class Users(models.Model):
     name = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+
+class Tools(models.Model):
+    name = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
+    description = models.TextField(max_length=1000)
+    
+    def __str__(self):
+        return self.name

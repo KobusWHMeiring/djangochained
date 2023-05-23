@@ -2,4 +2,25 @@
 <h2>Stick around to follow the journey of where this might go.</h2>
 
 
-<div>Welcome {{userName}}, we're getting there my guy</div>
+<div>Welcome {{specific}}, we're getting there my guy</div>
+
+<div>{{fullList}}</div>
+
+<div>Full List Broken: </div> 
+ {% for tool in tools %}
+ <div>Tool Name: {{tool.name}}</div>
+ <div>Tool Description: {{tool.description}}hello</div>
+ {% endfor %}
+
+ <form action = "{%url 'choose' %}" method = post>
+    {% csrf_token %}
+    <fieldset>{% for tool in tools %}
+    <input type="radio" name="tool" id="tool{{ forloop.counter }}" value="{{ tool.id }}">
+    <label for="tool{{ forloop.counter }}">{{ tool.name }}</label><br>
+    {% endfor %}
+    </fieldset>
+    <button type = "submit">
+        press
+    </button>
+ </form>
+

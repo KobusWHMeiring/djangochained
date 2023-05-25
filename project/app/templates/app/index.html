@@ -1,26 +1,47 @@
-<h1> This is the start of something big</h1>
-<h2>Stick around to follow the journey of where this might go.</h2>
+{%load static%}
+<link rel="stylesheet" href="{% static 'app/styles.css' %}">
+<script src="{% static 'app/scripts.js' %}" type="text/javascript"></script>
 
 
-<div>Welcome {{specific}}, we're getting there my guy</div>
+<div class="body">
 
-<div>{{fullList}}</div>
+    <div class = "modal-container hidden" id = "modal-container">
+        <div class = "modal-body">
+            <div class = "modal-header">
+                Hello, these tools are not yet available:
+            </div>
+            <div class = "modal-body">
+                The OCR system and the DAl-E system
+            </div>
+            <button onClick = "acceptDisappointment()">Unfortunate...</button>
+        </div>
 
-<div>Full List Broken: </div> 
- {% for tool in tools %}
- <div>Tool Name: {{tool.name}}</div>
- <div>Tool Description: {{tool.description}}hello</div>
- {% endfor %}
+    </div>
 
- <form action = "{%url 'choose' %}" method = post>
-    {% csrf_token %}
-    <fieldset>{% for tool in tools %}
-    <input type="radio" name="tool" id="tool{{ forloop.counter }}" value="{{ tool.id }}">
-    <label for="tool{{ forloop.counter }}">{{ tool.name }}</label><br>
-    {% endfor %}
-    </fieldset>
-    <button type = "submit">
-        press
-    </button>
- </form>
+    <div class = "main-options" id = "main-options">
+        <div class="descriptions">
+        <div class="title">We have the following list of tools available: </div>
+        {% for tool in tools %}
+        <p><strong>Tool:</strong> {{tool.name}}</p>
+        <p class="description-text"><strong>Description:</strong> {{tool.description}}</p>
+        <div class="divider"></div>
+        {% endfor %}
+    </div>
 
+    <div class="options">
+        <p>Please select the one you would like to use</p>
+
+        <div class="selection-container"><select id="tool-selected">
+                {% for tool in tools %}
+                <option value="{{tool.name}}">{{tool.name}}</option>
+                {%endfor%}
+            </select>
+            <button type="submit" onClick="handleSubmit()">
+                Select
+            </button>
+        </div>
+    </div>
+    </div>
+    
+
+</div>

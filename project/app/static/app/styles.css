@@ -1,0 +1,25 @@
+.title{
+    color:aliceblue;
+    border:1px, black, solid;
+    background-color: blue;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px;
+}
+
+.description-text{
+    margin-bottom: 32px
+}
+
+.selection-container{
+    display: flex;
+    justify-content: center;
+}
+
+.hidden{
+    display: none;
+}

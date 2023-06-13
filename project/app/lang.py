@@ -48,22 +48,7 @@ def query_chat(system, user, transcript):
 def send_whatsapp(message):
     
 
-    url = "https://graph.facebook.com/v17.0/110679078718694/messages"
-    headers = {
-        "Authorization": "Bearer EAANZBIgPmIpEBAAuYZAGwaiqX7sctdrms2fGEiUggbyhqiVK6z1oYOQUKQbhdwcy6BMUZBIYRS1XE0avbpp3uQSOgZA37kzKug00DOrsQETxIhmlNcB8JkQu5WopvxKN5uFON3vuvCc9EHTyGDxUZCD5rEdDu0HEZBddZC8ovuzXgSBpELwNUyt0ADLiiLMVitEJPh5vhCEDAZDZD",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "messaging_product": "whatsapp",
-        "to": "27799140837",
-        "type": "template",
-        "template": {
-            "name": message,
-            "language": {
-                "code": "en_US"
-            }
-        }
-    }
+    
 
     response = requests.post(url, headers=headers, json=data)
     print(response.text)

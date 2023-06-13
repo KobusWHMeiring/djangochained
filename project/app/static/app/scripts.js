@@ -17,14 +17,9 @@ function sendMessage(){
     let title = "Niksnie"
     convoobject = document.getElementById("conversation").innerHTML
     
-    console.log('convoobject', convoobject)
+    
+    
 
-    if (convoobject == ""){
-        console.log('convoobject to check if title needs to be created', convoobject)
-        var words = userMessage.split(" "); // Split the string by spaces
-        var firstWord = words[0];
-        title = firstWord
-    }
     showUserMessage(userMessage, systemMessage)
     
 
@@ -34,7 +29,7 @@ function sendMessage(){
         data: {
             'user_message': userMessage,
             'system_message': systemMessage, 
-            'title': title,
+            'session_guid': conversationGuid,
         
         },
         dataType: 'json',
@@ -43,9 +38,9 @@ function sendMessage(){
             console.log(response)
             showMessage(response.content)
             console.log('response.guid', response.guid)
-            story = story + response.content
             document.getElementById("send-button").innerHTML = "Send"
            /*  createNewChat() */
+           
         }
     }
 
@@ -64,8 +59,7 @@ function showMessage(message){
 function showUserMessage(message, system){
     newMessage = document.createElement('div')
     newMessage.classList.add("user-message")
-
-    newMessage.innerHTML = message
+    newMessage.innerHTML = "User Message: "+ message
     newSysMessage = document.createElement('div')
     system = "System Prompt: " + system
     newSysMessage.innerHTML = system

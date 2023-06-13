@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from app import lang, managedata, openai
+from app.models import Conversation, Messages
 # Create your views here.
 
 def home(request):
@@ -17,16 +18,11 @@ def prompt(request):
    
     user_message = request.POST.get('user_message', None)
     system_message = request.POST.get('system_message', None)
-    title = request.POST.get('title', None)
+    #first word of the user's request.
     session_guid = request.POST.get('session_guid', None)
-    print ("title received from api")
-    print(title)
     
-    print("session guid received at start of prompt view")
-    print(session_guid)
-    
-    
-   
+    #conversation object.  __str__ in this case wil be the title of the object
+    session = Conversation.objects.get(guid = session_guid)
     managedata.add_message(session, user_message, system_message, "user")
     
     
@@ -34,7 +30,16 @@ def prompt(request):
     print("lang response")
     print(lang_response) """
     
-    response_data = openai.chat4(system_message, user_message)
+    response_data = openai.chat3turbo(system_message, user_message)
+    managedata.add_message(session, response_data.content, "NA", "system")
+    this_convo = Conversation.objects.get(guid = session.guid)
+    convo_list = Messages.objects.filter(conversation = this_convo)
+    
+    
+    for message in convo_list:
+        print("message in convolist")
+        print (message.prompt_value)
+ 
     print("openai response")
     print(response_data)
     

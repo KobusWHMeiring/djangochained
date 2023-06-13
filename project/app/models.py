@@ -1,25 +1,25 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 
 class Conversation(models.Model):
-    user = models.CharField(max_length=100)
-    message_title = models.CharField(max_length=200)
-    message_content = models.TextField(max_length =20000)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    guid = models.UUIDField(primary_key = True,
+         default = uuid.uuid4,
+         editable = False)
+    title = models.CharField(max_length=200)
     
     def __str__(self):
-        return self.message_title
+        return self.title
     
-class Users(models.Model):
-    name = models.ForeignKey(Conversation, on_delete=models.CASCADE)
     
-    def __str__(self):
-        return self.name
-
-class Tools(models.Model):
-    name = models.CharField(max_length=200)
-    category = models.CharField(max_length=200)
-    description = models.TextField(max_length=1000)
+class Messages(models.Model):
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    prompt_value = models.TextField()
+    system_value = models.TextField()
+    role = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.name
+        return self.prompt_value

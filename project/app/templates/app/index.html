@@ -1,47 +1,37 @@
-{%load static%}
+
+{% load static %}
+
 <link rel="stylesheet" href="{% static 'app/styles.css' %}">
 <script src="{% static 'app/scripts.js' %}" type="text/javascript"></script>
+<script src="{% static 'app/jquery.js' %}" type="text/javascript"></script>
 
-
-<div class="body">
-
-    <div class = "modal-container hidden" id = "modal-container">
-        <div class = "modal-body">
-            <div class = "modal-header">
-                Hello, these tools are not yet available:
+<div>
+    <div class = "nav-container" id = "nav-container">
+        <div class = "nav" id = "nav">
+            <div class = "logo-container">
+                <img id="menu-icon-mobile" class="logo" src="{%static 'app/logo.png'%}" />
             </div>
-            <div class = "modal-body">
-                The OCR system and the DAl-E system
-            </div>
-            <button onClick = "acceptDisappointment()">Unfortunate...</button>
+            <div class = "title">Tender PowerTools</div>
+            <div class = "mode-switch">Dark Mode</div>
+        </div>
+    </div>
+    <div class = "content-wrapper">
+<div class = content-container>
+    <div class = "conversation-container">
+        <div class = "conversation" id = "conversation">
+
         </div>
 
     </div>
-
-    <div class = "main-options" id = "main-options">
-        <div class="descriptions">
-        <div class="title">We have the following list of tools available: </div>
-        {% for tool in tools %}
-        <p><strong>Tool:</strong> {{tool.name}}</p>
-        <p class="description-text"><strong>Description:</strong> {{tool.description}}</p>
-        <div class="divider"></div>
-        {% endfor %}
-    </div>
-
-    <div class="options">
-        <p>Please select the one you would like to use</p>
-
-        <div class="selection-container"><select id="tool-selected">
-                {% for tool in tools %}
-                <option value="{{tool.name}}">{{tool.name}}</option>
-                {%endfor%}
-            </select>
-            <button type="submit" onClick="handleSubmit()">
-                Select
-            </button>
+        <div class = "prompt-container" id = "prompt-container">
+            <input type = "text" placeholder = "System Prompt" id = "system-prompt" class ="system-prompt" value = "you are charles dowding" >
+            <input type = "text" placeholder = "User Message" id = "user-prompt" class = "user-prompt" onkeydown="handleKeyDown(event)">
+            <button onclick = "sendMessage()" id = "send-button"> Send</button>
         </div>
+        
+
     </div>
     </div>
     
-
+    
 </div>

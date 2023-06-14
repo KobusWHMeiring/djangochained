@@ -29,6 +29,13 @@
 
     </div>
         <div class = "prompt-container" id = "prompt-container">
+            <label for="models">Choose a model:</label>
+            <select id="models" name="models" size="4" multiple>
+              <option value="gpt4">gpt4</option>
+              <option value="gpt3">gpt3</option>
+              <option value="gpt3.5">gpt3.5</option>
+              <option value="google_flan">Google Flan</option>
+            </select>
             <input type = "text" placeholder = "System Prompt" id = "system-prompt" class ="system-prompt" value = "you are charles dowding" >
             <input type = "text" placeholder = "User Message" id = "user-prompt" class = "user-prompt" onkeydown="handleKeyDown(event)">
             <button onclick = "sendMessage()" id = "send-button"> Send</button>

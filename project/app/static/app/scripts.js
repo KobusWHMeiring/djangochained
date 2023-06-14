@@ -8,11 +8,11 @@ function initialiseConvo(){
 function sendMessage(){
     let systemMessage = document.getElementById("system-prompt").value
     let userMessage = document.getElementById("user-prompt").value
+    let models = document.getElementById("models").value
     
     document.getElementById("user-prompt").value = ""
-    console.log('systemMessage', systemMessage)
-    console.log('userMessage', userMessage)
     prompt = {"system": systemMessage, "user": userMessage}
+
     document.getElementById("send-button").innerHTML = "Sent!"
     let title = "Niksnie"
     convoobject = document.getElementById("conversation").innerHTML
@@ -30,7 +30,7 @@ function sendMessage(){
             'user_message': userMessage,
             'system_message': systemMessage, 
             'session_guid': conversationGuid,
-        
+            'model': models,
         },
         dataType: 'json',
         success: function(response){
@@ -40,7 +40,7 @@ function sendMessage(){
             console.log('response.guid', response.guid)
             document.getElementById("send-button").innerHTML = "Send"
            /*  createNewChat() */
-           
+
         }
     }
 

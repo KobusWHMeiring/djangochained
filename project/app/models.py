@@ -23,3 +23,15 @@ class Messages(models.Model):
     
     def __str__(self):
         return self.prompt_value
+    
+    def transcript(self):
+        messages = []
+        related_messages = Messages.objects.filter(conversation=self).order_by('created')
+        
+        for message in related_messages:
+            if message.role == 'system':
+                messages.append({"role": "system", "content": message.prompt_value})
+            else:
+                messages.append({"role": "user", "content": message.prompt_value})
+        
+        return messages

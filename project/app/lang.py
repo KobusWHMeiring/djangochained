@@ -50,8 +50,8 @@ def send_whatsapp(message):
 
     
 
-    response = requests.post(url, headers=headers, json=data)
-    print(response.text)
+   """  response = requests.post(url, headers=headers, json=data)
+    print(response.text) """
 
 
 def edit_mode(system, user):
